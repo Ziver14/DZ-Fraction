@@ -1,5 +1,6 @@
 ﻿#include<iostream>
 
+#include<exception>
 
 class Fraction {
 
@@ -7,13 +8,23 @@ class Fraction {
 	size_t  denominator;
 public:
 	Fraction(size_t numerator_, size_t denominator_) {
-		if ( denominator_ == 0) {
-			throw std::exception("message");
+		try {
+			if (denominator_ == 0) {
+				throw std::exception("Error: Division by zero");
+			}
+			numerator = numerator_;
+			denominator = denominator_;
 		}
-		numerator = numerator_;
-		denominator = denominator_;
-	}
 
+		catch (const std::exception& e) {
+			std::cerr << "Error" << e.what() << std::endl;
+		}
+
+	}
+		
+	
+	
+	
 	void print_fraction() {
 		std::cout << numerator << '/' << denominator << std::endl;
 	}
